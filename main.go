@@ -59,6 +59,16 @@ func main() {
 				break
 			}
 		}
+		if isLogin.Email != Acc.Email || isLogin.Password != Acc.Password {
+			ctx.JSON(http.StatusUnauthorized, Response{
+				Message: "Unauthorized",
+				Data:    nil,
+				Success: false,
+				Error:   "Wrong email or password",
+			})
+			return
+		}
+
 		if isLogin.Id == 0 {
 			ctx.JSON(http.StatusUnauthorized, Response{
 				Message: "Unauthorized",
